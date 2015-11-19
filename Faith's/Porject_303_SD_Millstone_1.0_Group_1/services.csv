@@ -1,0 +1,12 @@
+id,name,menu_shorcut,price_per_min,no_limit,duration1,duration2,duration3
+101,Mineral Bath,MB,2.5,TRUE,,,90
+201,Swedish,SW,3,FALSE,30,60,
+202,Shiatsu,SH,3,FALSE,30,60,
+203,Deep Tissue,DT,3,FALSE,30,60,
+301,Normal ,N,3,FALSE,30,60,
+302,Collagen,C,3,FALSE,30,60,
+401,Hot Stone,HS,3.5,FALSE,,60,90
+402,Sugar Scrub,SS,3.5,FALSE,,60,90
+403,Herbal Body Wrap,BW,3.5,FALSE,,60,90
+404,Botanical Mud Wrap,MW,3.5,FALSE,,60,90
+,,,,,,60,
