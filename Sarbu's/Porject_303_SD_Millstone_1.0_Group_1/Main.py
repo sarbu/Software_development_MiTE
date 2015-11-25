@@ -12,17 +12,16 @@ def main():
     print '                      *=================================================*'
     print '                           We provide the services described below'
     print '                      *=================================================*'
-    
-                                       
+
+
     print '                      *=================================================*'
     print '                       H:HomePage'
     print '                       M:Make a reservation '
     print '                       C:Canclation'
     print '                       G:Guests    '
     print '                      *=================================================*'
-    
+
 
 
 
 if __name__ == '__main__': main()
-
