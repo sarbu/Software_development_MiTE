@@ -344,15 +344,7 @@ def makeReservation(nbr,sid,bktime, date, duration):
             sdict[nbr] = [[sid,bktime,date, duration]]
         else:
             sdict[nbr].append([sid,bktime,date, duration])
-
-'''def serviceDurationLimit(duration):
-    Make reservations based on the time limitations for each service
-    if sid === "1":
-       duration = 60 or 90
-       makereservation()
-    else:
-        print:"Please enter either 60 or 90 minutes"
-'''
+            
 
 def checkout(nbr):
     ''' Given a client ID, check him/her out i.e
@@ -484,7 +476,7 @@ print 'We currently have %d guests'%len(adict)
 
 # kwd is short for keyword
 kwd = ['checkin','q','guestlist', 'checkout','gueststay','gservlist','savail','h', \
-       'mkres', 'cres','suggs', 'bktime','spaservices','getbill']
+       'mkres', 'cres','suggs', 'bktime','servicelist','getbill']
 
 inp = raw_input('ENTER A COMMAND: ').lower()
 
@@ -517,7 +509,7 @@ while (inp != 'q'):
             stay(gid)
             
         # LIST OF SPA SERVICES
-        elif (inp == 'spaservices'):
+        elif (inp == 'servicelist'):
             for k, v in spaservices.items():
                 print k,v
                 print "\n"
@@ -581,10 +573,46 @@ while (inp != 'q'):
                 gid = input('Enter an ID: ')
 
             sid = input('Enter a service ID (1-10): ')
+            if sid in {1,7,8,9,10}:
+                print 'The service you have chosen is offered for 60 or 90 minutes'
+                while True:
+                    duration = input('Enter service duration (in mins): ')
+                    if duration not in {60, 90}:
+                        print 'Please enter a valid number!'
+                        continue
+                    else:
+                    #the user inputs the correct duration
+                    #ready to exit the loop
+                        break   
+            elif sid in {2,3,4,5,6}:
+                print 'The service you have chosen is offered for 30 or 60 minutes'
+                while True:
+                    duration = input('Enter service duration (in mins): ')
+                    if duration not in {30, 60}:
+                        print 'Please enter a valid number!'
+                        continue
+                    else:
+                        #the user inputs the correct duration
+                        #ready to exit the loop
+                        break  
+            else:
+                print 'There is no service with that ID!'
+                while True:
+                    sid = input('Enter a service ID (1-10): ')
+                    if sid not in {1,2,3,4,5,6,7,8,9,10}:
+                        print 'There is no service with that ID!'
+                        continue
+                    else:
+                        #the user inputs the correct duration
+                        #ready to exit the loop
+                        break  
+                    
+             
             bkyr,bkmt,bkday,bkhr,bkmn = input('Enter booking day & time (yyyy,mm,dd,hh,min): ')
             dyr,dmt,dday,dhr,dmn = input('Enter service date & time (yyyy,mm,dd,hh,min): ')
-            duration = input('Enter service duration (in mins): ')
-
+            #Call the beyondStay function, once we create it that is :)
+            
+            
             bk_dtime = datetime.datetime(bkyr,bkmt,bkday,bkhr,bkmn)
             d_dtime = datetime.datetime(dyr,dmt,dday,dhr,dmn)
             duration = datetime.timedelta(0,duration*60)
@@ -592,6 +620,8 @@ while (inp != 'q'):
             makeReservation(gid, sid, bk_dtime, d_dtime, duration)
             
             print 'Reservation has been made.'
+            money = getBill(gid)
+            print 'Your total charge for service(s) is currently $%4.2f'%(money)
 
 
         # CANCEL A RESERVATION
@@ -603,8 +633,10 @@ while (inp != 'q'):
                 gid = input('Enter an ID: ')
  
             servInd = input('ENTER SERVICE INDEX: ')
+            #index is number of services, start counting from 1 not 0!
 
             yr,mt,day,hr,mn = input('Enter cancelling day & time (yyyy,mm,dd,hh,min): ')
+            #cancelling is the time of cancellation now
             cctime = dtfun([yr, mt, day, hr, mn])
 
             cancelRes(gid, servInd, cctime)
